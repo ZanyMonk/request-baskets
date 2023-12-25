@@ -2,7 +2,7 @@ package main
 
 import (
 	"fmt"
-	"io/ioutil"
+	"io"
 	"log"
 	"net/http"
 	"net/url"
@@ -142,7 +142,7 @@ func ToRequestData(req *http.Request) *RequestData {
 	data.Path = req.URL.Path
 	data.Query = req.URL.RawQuery
 
-	body, _ := ioutil.ReadAll(req.Body)
+	body, _ := io.ReadAll(req.Body)
 	data.Body = string(body)
 
 	return data
@@ -193,7 +193,7 @@ func (req *RequestData) Forward(client *http.Client, config BasketConfig, basket
 		badGatewayResp := &http.Response{
 			StatusCode: http.StatusBadGateway,
 			Header:     http.Header{},
-			Body:       ioutil.NopCloser(strings.NewReader(fmt.Sprintf("Failed to forward request: %s", err)))}
+			Body:       io.NopCloser(strings.NewReader(fmt.Sprintf("Failed to forward request: %s", err)))}
 		badGatewayResp.Header.Set("Content-Type", "text/plain")
 
 		return badGatewayResp, nil

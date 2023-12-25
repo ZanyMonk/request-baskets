@@ -10,7 +10,7 @@ import (
 	"testing/iotest"
 	"time"
 
-	"io/ioutil"
+	"io"
 
 	"github.com/julienschmidt/httprouter"
 	"github.com/stretchr/testify/assert"
@@ -1759,7 +1759,7 @@ func TestAcceptBasketRequests_WithProxyResponse(t *testing.T) {
 			AcceptBasketRequests(w, r)
 
 			// read response body
-			responseBody, err := ioutil.ReadAll(w.Body)
+			responseBody, err := io.ReadAll(w.Body)
 			assert.NoError(t, err)
 
 			// validate expected response

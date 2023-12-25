@@ -2,7 +2,7 @@ package main
 
 import (
 	"fmt"
-	"io/ioutil"
+	"io"
 	"net/http"
 	"net/url"
 	"strings"
@@ -16,7 +16,7 @@ func createTestPOSTRequest(reqURL string, content string, contentType string) *h
 	request := new(http.Request)
 	request.Method = "POST"
 	request.URL, _ = url.Parse(reqURL)
-	request.Body = ioutil.NopCloser(strings.NewReader(content))
+	request.Body = io.NopCloser(strings.NewReader(content))
 	request.ContentLength = int64(len(content))
 	request.Header = make(http.Header)
 	request.Header.Add("Content-Type", contentType)
