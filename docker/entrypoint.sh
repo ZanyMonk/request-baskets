@@ -34,10 +34,6 @@ if [ -n "$MAXSIZE" ]; then
     args="$args -maxsize $MAXSIZE"
 fi
 
-if [ -n "$TOKEN" ]; then
-    args="$args -token $TOKEN"
-fi
-
 if [ -n "$BASKET" ]; then
     args="$args -basket $BASKET"
 fi

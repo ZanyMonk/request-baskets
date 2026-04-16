@@ -1,6 +1,7 @@
 package main
 
 import (
+	"os"
 	"flag"
 	"fmt"
 	"html/template"
@@ -59,7 +60,7 @@ func CreateConfig() *ServerConfig {
 	var initCapacity = flag.Int("size", initBasketCapacity, "Initial basket size (capacity)")
 	var maxCapacity = flag.Int("maxsize", maxBasketCapacity, "Maximum allowed basket size (max capacity)")
 	var pageSize = flag.Int("page", defaultPageSize, "Default page size")
-	var masterToken = flag.String("token", "", "Master token, random token is generated if not provided")
+	var masterToken = flag.String("token", os.Getenv("TOKEN"), "Master token, random token is generated if not provided")
 	var dbType = flag.String("db", defaultDatabaseType, fmt.Sprintf(
 		"Baskets storage type: \"%s\" - in-memory, \"%s\" - Bolt DB, \"%s\" - SQL database",
 		DbTypeMemory, DbTypeBolt, DbTypeSQL))
